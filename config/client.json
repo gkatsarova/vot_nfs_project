@@ -1,0 +1,8 @@
+{
+  "clientId": "nfs-client",
+  "secret": "your-client-secret",
+  "realm": "nfs-realm",
+  "auth-server-url": "http://keycloak:8080/auth",
+  "public-client": false,
+  "confidential-port": 0
+}

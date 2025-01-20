@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  app:
+    build: ./src
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./src:/app
+      - ./nfs_share:/mnt/nfs_share
+    environment:
+      - JWT_SECRET_KEY=мmy_secret_key
+      - NFS_SHARE_PATH=/mnt/nfs_share
+    depends_on:
+      - nfs
+      - keycloak
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    environment:
+      - KC_BOOTSTRAP_ADMIN_USERNAME=admin
+      - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    ports:
+      - "8080:8080"
+    command: start-dev
+
+  nfs:
+    image: itsthenetwork/nfs-server-alpine:latest
+    environment:
+      - SHARED_DIRECTORY=/nfs_share
+    volumes:
+      - ./nfs_share:/nfs_share
+    ports:
+      - "2049:2049"

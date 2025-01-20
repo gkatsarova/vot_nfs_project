@@ -1,0 +1,11 @@
+{
+  "realm": "nfs-realm",
+  "clients": [
+    {
+      "clientId": "nfs-client",
+      "directAccessGrantsEnabled": true,
+      "publicClient": false,
+      "secret": "your-client-secret"
+    }
+  ]
+}
